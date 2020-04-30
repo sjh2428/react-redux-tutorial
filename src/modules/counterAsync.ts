@@ -1,18 +1,20 @@
+import { Dispatch } from 'react';
+
 const INCREASE = 'INCREASE' as const;
 const DECREASE = 'DECREASE' as const;
 
 export const increase = () => ({ type: INCREASE });
 export const decrease = () => ({ type: DECREASE });
 
-export const increaseAsync = () => (dispatch: any) => {
+type CounterAction = ReturnType<typeof increase> | ReturnType<typeof decrease>;
+
+export const increaseAsync = () => (dispatch: Dispatch<CounterAction>) => {
   setTimeout(() => dispatch(increase()), 1000);
 };
 
-export const decreaseAsync = () => (dispatch: any) => {
+export const decreaseAsync = () => (dispatch: Dispatch<CounterAction>) => {
   setTimeout(() => dispatch(decrease()), 1000);
 };
-
-type CounterAction = ReturnType<typeof increase> | ReturnType<typeof decrease>;
 
 const initialState = 0;
 
